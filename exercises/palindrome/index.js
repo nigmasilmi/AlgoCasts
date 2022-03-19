@@ -7,6 +7,28 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {}
+function palindrome(str) {
+  // not optimal because once we compare to the middle of the arr we already know if it is a palindrome or not
+  return str.split('').every((char, i) => {
+    return char === str[str.length - 1 - i];
+  });
+}
 
 module.exports = palindrome;
+
+// function palindrome(str) {
+//     let reversed = '';
+//     for (let char of str) {
+//       reversed = char + reversed;
+//     }
+//     if (reversed === str) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   }
+
+// function palindrome(str) {
+//     const reversed = str.split('').reverse().join('');
+//     return reversed === str;
+//   }
