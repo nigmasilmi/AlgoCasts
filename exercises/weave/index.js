@@ -24,6 +24,33 @@
 
 const Queue = require('./queue');
 
-function weave(sourceOne, sourceTwo) {}
+function weave(sourceOne, sourceTwo) {
+  const queue = new Queue();
+  // iterate over the arrays if both have a next element to contribute
+  while (sourceOne.peek() && sourceTwo.peek()) {
+    // remove one item from the sourceOne
+    let itemA = sourceOne.remove();
+    // add that item to the result queue
+    queue.data.unshift(itemA);
+    // remove one item from the sourceTwo
+    let itemB = sourceTwo.remove();
+    // add that item to the result queue
+    queue.data.unshift(itemB);
+  }
+
+  // check which of the arrays has elements left
+  // add them as they are to the start of the queue
+  if (sourceOne.length > 0) {
+    while (sourceOne.length > 0) {
+      queue.add(sourceOne.remove());
+    }
+  } else {
+    while (sourceTwo.length > 0) {
+      queue.add(sourceTwo.remove());
+    }
+  }
+
+  return queue;
+}
 
 module.exports = weave;
